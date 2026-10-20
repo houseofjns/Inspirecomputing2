@@ -1,0 +1,1098 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>House of J&amp;S | Inspire Computing Year 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c79b3b;--gold-light:#f5eddb;--ink:#282720;--muted:#5f5a50;
+  --line:#e9e2d3;--paper:#fbf9f4;--white:#fff;
+  --good:#236747;--good-bg:#eaf5ee;--bad:#a03c34;--bad-bg:#fbefed;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.7;font-size:16px}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--white);border-radius:9px;padding:13px 20px;font-size:15px;font-weight:500;transition:border-color .15s,background .15s}
+button:hover{border-color:var(--gold)}
+button:disabled{opacity:.4;cursor:not-allowed}
+header{position:sticky;top:0;z-index:9;background:var(--white);border-bottom:1px solid var(--line);padding:16px clamp(18px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.brand{display:flex;gap:14px;align-items:center;min-width:0}
+.brand img{width:52px;height:52px;object-fit:contain;flex-shrink:0}
+.brand small{display:block;color:#a47c25;font-size:11px;letter-spacing:1.5px;font-weight:700}
+.brand b{display:block;font:700 24px 'Playfair Display',serif;white-space:nowrap}
+.brand span{display:block;font-size:12px;letter-spacing:1px;color:#777;text-transform:uppercase}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav button{border:0;color:#655f53;background:transparent;font-size:14px;padding:10px 14px}
+nav button.active{background:var(--gold-light);color:#926c1e;font-weight:700}
+#menu{display:none;font-size:22px;padding:8px 16px}
+.welcome{display:flex;align-items:center;gap:10px;font-size:13px;color:#926c1e;font-weight:600;margin-left:auto;margin-right:12px;white-space:nowrap;background:var(--gold-light);padding:8px 16px;border-radius:24px}
+.welcome .dot{width:10px;height:10px;border-radius:50%;background:#4caf50;box-shadow:0 0 0 3px #4caf5033}
+.welcome button{font-size:12px;padding:5px 12px;background:#fff;border-color:#e5dcc8;border-radius:20px}
+main{max-width:1440px;margin:auto}
+#hero{padding:60px clamp(20px,8vw,120px);display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;background:radial-gradient(circle at 80% 15%,#f5e9ca 0,transparent 32%),linear-gradient(120deg,#fff,#fbf8ef);min-height:460px}
+label,.kicker{color:#9b7425;letter-spacing:1.5px;font-size:12px;font-weight:700}
+h1{font:800 clamp(46px,5.5vw,72px)/1.05 'Playfair Display',serif;letter-spacing:-1px;margin:25px 0 20px}
+h1 em{color:#b4872b;font-style:normal}
+#hero p{font-size:17px;color:var(--muted);line-height:1.8;max-width:540px}
+.gold{background:var(--gold);color:white;border-color:var(--gold);box-shadow:0 6px 15px #c79b3b30}
+.meta{font-size:13px!important}
+.art{min-height:300px;position:relative;display:grid;place-items:center}
+.sun{position:absolute;width:270px;height:270px;border-radius:50%;background:linear-gradient(135deg,#f5df9c,#c99c3c);right:8%;top:0}
+.artcard{z-index:1;background:#282923;color:white;padding:25px 30px;width:290px;min-height:300px;box-shadow:17px 20px 0 #d8bd78;transform:rotate(2deg)}
+.artcard small{color:#dfc47e;letter-spacing:1.5px;font-size:11px}
+.symbol{font-size:60px;color:#d9b456;margin-top:28px}
+.artcard h2{font:700 36px/1.1 'Playfair Display',serif;margin:0 0 18px}
+.artcard hr{width:45px;margin-left:0;border:0;height:2px;background:#d7b052}
+.artcard p{font-size:13px!important;color:#ccc!important}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin:0 clamp(20px,8vw,120px);background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.stats div{text-align:center;padding:22px;border-right:1px solid var(--line)}
+.stats div:last-child{border:0}
+.stats b{display:block;font:700 30px 'Playfair Display',serif;color:#a77d25}
+.stats span{font-size:13px;color:var(--muted)}
+#view{padding:55px clamp(18px,8vw,120px) 80px;min-height:420px}
+.head{margin-bottom:28px}
+.head h2{font:700 42px 'Playfair Display',serif;margin:10px 0}
+.head p,.muted{font-size:15px;line-height:1.8;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:18px}
+.card{display:flex;flex-direction:column;min-height:220px}
+.num{background:var(--gold-light);color:#a47b25;border-radius:9px;padding:10px 16px;width:max-content;font-size:13px;font-weight:700;letter-spacing:.5px}
+.card h3,.lesson h3{font:700 24px 'Playfair Display',serif;margin:16px 0 8px;line-height:1.3}
+.card p{font-size:15px;color:var(--muted);line-height:1.7;flex:1}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.tabs button{font-size:13px;padding:10px 16px}
+.tabs button.active{background:#292a24;color:white;border-color:#292a24}
+.lesson{border:1px solid #eee6d6;padding:20px;border-radius:10px;margin:12px 0}
+.lesson p{font-size:16px;line-height:1.85;color:#5f5a50;margin:0}
+.vocab{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.word{background:#faf7ef;border:1px solid #f0e7d4;padding:16px;border-radius:9px;font-size:15px;line-height:1.6}
+.word b{display:block;color:#926c1e;margin-bottom:6px;font-size:16px}
+.callout{padding:16px 20px;background:#f7f0de;border-left:4px solid var(--gold);font-size:15px;line-height:1.7;color:#6d592b;margin:18px 0;border-radius:6px}
+.q{border:1px solid var(--line);background:white;border-radius:12px;padding:22px;margin:14px 0}
+.qtop{font-size:12px;letter-spacing:.8px;color:#987128;font-weight:700;margin-bottom:14px;line-height:1.6}
+.q h3{font-size:17px;line-height:1.65;margin:0 0 14px;font-weight:600}
+.options{display:grid;gap:10px}
+.opt{border:1px solid var(--line);border-radius:9px;padding:13px 16px;font-size:15px;display:flex;gap:10px;align-items:center;cursor:pointer;line-height:1.5}
+.opt:hover{background:#fbf8ef;border-color:#d9c99a}
+.opt input{accent-color:#b68a2d;width:18px;height:18px;flex-shrink:0}
+.q input[type=text],.q textarea,.q select{width:100%;padding:13px 16px;border:1.5px solid #ded6c5;border-radius:9px;background:#fffdf9;font:15px 'DM Sans',sans-serif;line-height:1.5}
+.q input[type=text]:focus,.q textarea:focus,.q select:focus{outline:none;border-color:var(--gold);background:#fff}
+.q textarea{min-height:90px;resize:vertical}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pairs .word{font-size:15px}
+.pairs .word select{margin-top:6px;font-size:14px;padding:10px 12px}
+.feedback{padding:14px 16px;border-radius:8px;font-size:14px;line-height:1.7;margin-top:14px}
+.good{background:var(--good-bg);color:var(--good)}
+.bad{background:var(--bad-bg);color:var(--bad)}
+.timer{background:#282923;color:#f4d783;padding:14px 22px;border-radius:10px;font-weight:700;font-size:22px;letter-spacing:2px}
+.bar{height:8px;background:#eee7d8;border-radius:9px;overflow:hidden;margin:18px 0}
+.bar span{display:block;background:var(--gold);height:100%;transition:width .3s}
+.result{font:700 56px 'Playfair Display',serif;color:#a77d25}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.three div{background:#faf7ef;border-radius:9px;padding:18px}
+.three b{display:block;font-size:26px}
+.three span{font-size:12px;color:var(--muted)}
+.hidden{display:none!important}
+footer{background:#25261f;color:white;padding:36px clamp(20px,8vw,120px);display:grid;grid-template-columns:1fr 1fr;gap:16px 25px}
+footer b{font:700 24px 'Playfair Display',serif}
+footer span{color:#c9b77f;text-transform:uppercase;font-size:12px}
+footer p{font-size:14px;color:#ccc;margin:0;line-height:1.6}
+.links{display:flex;gap:18px;flex-wrap:wrap}
+.links a{font-size:13px;color:#e5cd88;text-decoration:none}
+.links a:hover{text-decoration:underline}
+footer small{grid-column:1/-1;border-top:1px solid #ffffff22;padding-top:16px;color:#aaa;font-size:12px;line-height:1.6}
+.login-overlay{position:fixed;inset:0;background:radial-gradient(circle at 50% 0%,#f5e9ca 0,transparent 45%),#fbf9f4;display:flex;align-items:center;justify-content:center;z-index:999;padding:20px}
+.login-overlay.hidden{display:none}
+.login-box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:44px 38px;max-width:460px;width:100%;text-align:center;box-shadow:0 25px 70px rgba(0,0,0,0.12)}
+.login-box img{width:80px;height:80px;object-fit:contain;margin-bottom:10px}
+.login-box .kicker{display:block;margin-bottom:8px;font-size:12px}
+.login-box h2{font:700 34px 'Playfair Display',serif;margin:0 0 8px;color:var(--ink)}
+.login-box p{font-size:15px;color:var(--muted);margin:0 0 26px;line-height:1.6}
+.login-box input{width:100%;padding:15px 18px;border:1.5px solid var(--line);border-radius:11px;font:16px 'DM Sans',sans-serif;margin-bottom:14px;background:#fffdf9}
+.login-box input:focus{outline:none;border-color:var(--gold);background:#fff;box-shadow:0 0 0 4px #c79b3b15}
+.login-box .gold{width:100%;padding:16px;font-weight:700;font-size:16px;margin-top:6px}
+.login-error{color:var(--bad);font-size:14px;min-height:20px;margin-bottom:8px;font-weight:600}
+.login-hint{font-size:13px;color:#a47c25;margin-top:20px;letter-spacing:.3px;line-height:1.5}
+.review-q{margin:16px 0}
+.review-block{margin-top:16px}
+.review-line{display:flex;gap:14px;padding:12px 0;border-bottom:1px dashed #eee6d6;font-size:15px;align-items:flex-start;flex-wrap:wrap}
+.review-line:last-child{border-bottom:0}
+.review-label{font-weight:700;color:#926c1e;min-width:150px;flex-shrink:0;font-size:12px;text-transform:uppercase;letter-spacing:.8px;padding-top:3px}
+.review-ans{flex:1;line-height:1.7;min-width:220px;word-break:break-word;font-size:15px}
+.review-ans.bad{color:var(--bad);font-weight:600}
+.review-ans.good{color:var(--good);font-weight:600}
+.review-ans.correct{color:var(--good);font-weight:700}
+.review-why{margin-top:16px;padding:14px 18px;background:#faf7ef;border-radius:10px;border-left:4px solid var(--gold);font-size:14px;line-height:1.75;color:#5f5a50}
+.text-good{color:var(--good);font-weight:700}
+.text-bad{color:var(--bad);font-weight:700}
+@media(max-width:850px){
+  header{flex-wrap:wrap}
+  #menu{display:block;margin-left:auto}
+  nav{display:none;flex-direction:column;width:100%;order:5}
+  nav.open{display:flex}
+  nav button{text-align:left;font-size:15px;padding:12px 16px}
+  #hero{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .welcome{margin-left:auto;margin-right:0;order:4}
+}
+@media(max-width:560px){
+  body{font-size:15px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stats div:nth-child(2){border-right:0}
+  .stats div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .grid,.vocab,.three,.pairs{grid-template-columns:1fr}
+  footer{grid-template-columns:1fr}
+  .links{grid-column:1}
+  h1{font-size:42px}
+  .head h2{font-size:32px}
+  .card h3,.lesson h3{font-size:21px}
+  .welcome{width:100%;justify-content:center;order:4;margin:10px 0 0 0}
+  .login-box{padding:34px 26px}
+  .login-box h2{font-size:28px}
+  .review-label{min-width:auto}
+}
+</style>
+</head>
+<body>
+
+<div id="loginOverlay" class="login-overlay">
+  <div class="login-box">
+    <img src="logo1.png" onerror="this.style.display='none'" alt="J&amp;S logo">
+    <label class="kicker">HOUSE OF J&amp;S</label>
+    <h2>Student Login</h2>
+    <p>Enter your name and class password to begin Year 2.</p>
+    <form id="loginForm" autocomplete="off">
+      <input type="text" id="studentNameInput" placeholder="Student Name" required maxlength="40">
+      <input type="password" id="studentPassInput" placeholder="Class Password" required>
+      <div id="loginError" class="login-error"></div>
+      <button type="submit" class="gold">Enter Learning Hub →</button>
+    </form>
+    <div class="login-hint">🔑 Class password is provided by your teacher</div>
+  </div>
+</div>
+
+<header>
+  <div class="brand">
+    <img src="logo1.png" onerror="this.style.display='none'" alt="J&amp;S logo">
+    <div>
+      <small>LEARN • CREATE • GROW</small>
+      <b>House of J&amp;S</b>
+      <span>Computer Training Center</span>
+    </div>
+  </div>
+  <div class="welcome" id="welcomeChip" style="display:none">
+    <span class="dot"></span>
+    <span id="welcomeName">Student</span>
+    <button onclick="logout()">Logout</button>
+  </div>
+  <button id="menu">☰</button>
+  <nav>
+    <button data-view="home" class="active">Home</button>
+    <button data-view="study">Study Notes</button>
+    <button data-view="practice">Workbook Practice</button>
+    <button data-view="exam">Unit Exams</button>
+    <button data-view="progress">My Progress</button>
+  </nav>
+</header>
+
+<main>
+  <section id="hero">
+    <div>
+      <label>YEAR 2 • PEARSON iPRIMARY</label>
+      <h1>Inspire Computing <em>Year 2.</em></h1>
+      <p>Online services, green screen videos, presentations, algorithms, turtle programming and networks — building strong digital foundations for young learners.</p>
+      <button class="gold" onclick="go('study')">Explore Study Notes ↗</button>
+      <button onclick="go('exam')">Start an Exam</button>
+      <p class="meta">✦ 6 units　 ◷ 60-minute exams　 ✓ Instant feedback</p>
+    </div>
+    <div class="art">
+      <div class="sun"></div>
+      <div class="artcard">
+        <small>J&amp;S LEARNING HUB</small>
+        <div class="symbol">⌘</div>
+        <h2>Think. Code.<br>Explore.</h2>
+        <hr>
+        <p>Curiosity is your superpower.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div><b>06</b><span>Study units</span></div>
+    <div><b>60</b><span>Question parts</span></div>
+    <div><b>80</b><span>Marks per exam</span></div>
+    <div><b>01:00</b><span>Hour timer</span></div>
+  </section>
+
+  <section id="view"></section>
+</main>
+
+<footer>
+  <div>
+    <b>House of J&amp;S</b>
+    <span>Computer Training Center</span>
+    <p style="margin-top:8px">Learning with confidence, one skill at a time.</p>
+  </div>
+  <div class="links">
+    <a target="_blank" rel="noopener" href="https://www.pearson.com/content/dam/one-dot-com/one-dot-com/international-schools/pdfs/primary-curriculum/iprimary/InspireComputing/InspireComputing-Y2-WB-answers.pdf">Official Pearson Year 2 Workbook Answers ↗</a>
+  </div>
+  <small>Independent learning companion. Pearson materials remain the property of their copyright holder.</small>
+</footer>
+
+<script>
+const CLASS_PASSWORD = 'HJS2026';
+let studentName = localStorage.getItem('jsStudentName_Y2') || '';
+const loginOverlay = document.getElementById('loginOverlay');
+const loginForm = document.getElementById('loginForm');
+const loginError = document.getElementById('loginError');
+const welcomeChip = document.getElementById('welcomeChip');
+const welcomeName = document.getElementById('welcomeName');
+
+function applyLoginState() {
+  if (studentName) {
+    loginOverlay.classList.add('hidden');
+    welcomeChip.style.display = 'flex';
+    welcomeName.textContent = studentName;
+  } else {
+    loginOverlay.classList.remove('hidden');
+    welcomeChip.style.display = 'none';
+  }
+}
+loginForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('studentNameInput').value.trim();
+  const pass = document.getElementById('studentPassInput').value;
+  loginError.textContent = '';
+  if (!name) { loginError.textContent = 'Please enter your name.'; return; }
+  if (pass !== CLASS_PASSWORD) { loginError.textContent = '❌ Incorrect password. Please check with your teacher.'; return; }
+  studentName = name;
+  localStorage.setItem('jsStudentName_Y2', studentName);
+  document.getElementById('studentPassInput').value = '';
+  applyLoginState();
+  go('home');
+});
+function logout() {
+  if (!confirm('Log out and switch student?')) return;
+  studentName = '';
+  localStorage.removeItem('jsStudentName_Y2');
+  loginOverlay.classList.remove('hidden');
+  welcomeChip.style.display = 'none';
+  document.getElementById('studentNameInput').value = '';
+  document.getElementById('studentPassInput').value = '';
+  loginError.textContent = '';
+}
+
+/* ============================================================
+   YEAR 2 UNIT DATA (Based on Pearson Y2 Workbook Answers)
+   ============================================================ */
+const embeddedUnits = [
+{
+  id:1,title:"Online Services",
+  sub:"Online and offline worlds, search engines, image editing and staying safe",
+  lessons:[
+    ["Online and offline world","The offline world is all around you and does not need a digital device to connect. The online world is the internet, which you connect to using a digital device."],
+    ["Online and offline shopping","Online shopping lets you buy things using the internet. Offline shopping means going into a shop. Online shops are open all the time and offer more choice, but offline shops let you see items in person."],
+    ["Surveys and data","A survey is a set of questions used to gather information. Data is a collection of information or results. Surveys can ask whether people prefer online or offline shopping."],
+    ["Search engines","A search engine finds web pages using keywords. Type a keyword or phrase, press enter or click the search icon to find results."],
+    ["Saving images","You can right-click an image and choose 'Save image as' to save it. Images may need cropping or resizing to fit a page or slide."],
+    ["Editing images","Crop removes unwanted parts of an image. Filter changes colours or adds effects like black and white. Resize changes the size of an image."],
+    ["Online safety","If you see something upsetting online, tell a trusted adult. Never give your phone number or personal information to strangers online."],
+    ["Digital footprint","A digital footprint is a log of all the information you leave behind when visiting websites. Think carefully before sharing anything online."],
+    ["Creating posters","Word processing or publishing software is best for creating posters. Save your work regularly and use a sensible filename."],
+    ["Improving posters","Add images or shapes for interest, vary fonts, spread text around the page, and use bold, underline, italics and bullet points to make key information stand out."]
+  ],
+  vocab:[["Offline world","The world around you that does not need a digital device."],["Online world","The world of the internet, accessed using a digital device."],["Survey","A set of questions to gather information."],["Data","A collection of information or results."],["Search engine","A service that finds web pages using keywords."],["Crop","Remove unwanted parts of an image."],["Filter","Change how an image looks, e.g. black and white."],["Resize","Change the size of an image."],["Digital footprint","A log of information you leave behind online."],["Trusted adult","A responsible adult who can help."]],
+  questions:[
+    {type:"mcq",q:"What is the offline world?",opts:["The world around you that does not need a digital device","The world of the internet","A type of search engine"],a:0,why:"Offline world: the world all around you without needing a digital device."},
+    {type:"mcq",q:"What is the online world?",opts:["The world of the internet accessed with a device","The physical world","A type of shop"],a:0,why:"Online world: the internet, accessed using a digital device."},
+    {type:"mcq",q:"What is a survey?",opts:["A set of questions to gather information","A type of image","A search engine"],a:0,why:"Survey: a set of questions to gather information."},
+    {type:"mcq",q:"What is data?",opts:["A collection of information or results","A type of computer","A filter"],a:0,why:"Data: a collection of information or results."},
+    {type:"mcq",q:"What does a search engine do?",opts:["Finds web pages using keywords","Edits images","Creates posters"],a:0,why:"Search engine: finds web pages using keywords."},
+    {type:"mcq",q:"What does crop do to an image?",opts:["Removes unwanted parts","Changes the colour","Makes it bigger"],a:0,why:"Crop: takes away unwanted objects from around the image."},
+    {type:"mcq",q:"What does a filter do?",opts:["Changes how an image looks","Saves an image","Deletes an image"],a:0,why:"Filter: changes the colours or adds special effects."},
+    {type:"mcq",q:"What does resize do?",opts:["Changes the size of an image","Removes parts","Changes colour"],a:0,why:"Resize: changes the size of an image, bigger or smaller."},
+    {type:"mcq",q:"What should you do if you see something upsetting online?",opts:["Tell a trusted adult","Share it with friends","Ignore it"],a:0,why:"Always tell a trusted adult if something feels unsafe."},
+    {type:"mcq",q:"What is a digital footprint?",opts:["A log of information you leave online","A type of shoe","A search engine"],a:0,why:"Digital footprint: a log of all the information you leave behind online."},
+    {type:"mcq",q:"What software is best for making a poster?",opts:["Word processing or publishing software","A calculator app","A music player"],a:0,why:"Word processing or publishing software is best for creating posters."},
+    {type:"mcq",q:"Why should you save your work regularly?",opts:["So you don't lose your work","To make it bigger","To add images"],a:0,why:"Saving regularly prevents losing work."},
+    {type:"mcq",q:"What should you do before sharing personal information online?",opts:["Be careful and tell a trusted adult","Share it with everyone","Post it publicly"],a:0,why:"Just be careful not to share personal information when online."},
+    {type:"mcq",q:"What does 'Save image as' do?",opts:["Saves an image to your device","Deletes an image","Changes the image colour"],a:0,why:"Right-click and select 'Save image as' to save an image."},
+    {type:"mcq",q:"What is one benefit of online shopping?",opts:["Shops are open all the time","You can touch the items","You don't need a device"],a:0,why:"Online shops are open all the time and offer more choice."},
+    {type:"mcq",q:"What is one benefit of offline shopping?",opts:["You can see items in person","You need a digital device","Shops are always open"],a:0,why:"Offline shopping lets you see and try items in person."},
+    {type:"mcq",q:"What does a search engine use to find pages?",opts:["Keywords or phrases","Image colours","File sizes"],a:0,why:"Search engines use keywords or phrases to find pages."},
+    {type:"mcq",q:"What should you not share with strangers online?",opts:["Your phone number","The weather","A picture of a tree"],a:0,why:"Never give your phone number or personal information to strangers."},
+    {type:"mcq",q:"What is a good filename for a poster?",opts:["A sensible name describing the poster","A random name","A single letter"],a:0,why:"Use a sensible filename that describes the content."},
+    {type:"mcq",q:"How can you make key information stand out on a poster?",opts:["Use bold, underline or italics","Use smaller text","Remove all colours"],a:0,why:"Formatting like bold, underline and italics makes key information stand out."},
+    {type:"fill",q:"The __________ world is all around you and does not need a digital device.",opts:["offline","online","digital"],a:"offline",why:"Offline world: the world around you without a digital device."},
+    {type:"fill",q:"The __________ world is the internet, accessed using a device.",opts:["online","offline","physical"],a:"online",why:"Online world: the internet accessed with a digital device."},
+    {type:"fill",q:"A __________ is a set of questions to gather information.",opts:["survey","filter","crop"],a:"survey",why:"Survey: a set of questions to gather information."},
+    {type:"fill",q:"__________ is a collection of information or results.",opts:["Data","A filter","A search engine"],a:"Data",why:"Data: a collection of information or results."},
+    {type:"fill",q:"A search __________ finds web pages using keywords.",opts:["engine","filter","image"],a:"engine",why:"Search engine: finds web pages using keywords."},
+    {type:"fill",q:"__________ removes unwanted parts of an image.",opts:["Crop","Resize","Filter"],a:"Crop",why:"Crop: takes away unwanted objects around the image."},
+    {type:"fill",q:"A __________ changes the colours or adds effects to an image.",opts:["filter","crop","survey"],a:"filter",why:"Filter: changes the colours or adds special effects."},
+    {type:"fill",q:"__________ changes the size of an image.",opts:["Resize","Crop","Filter"],a:"Resize",why:"Resize: changes the size of an image."},
+    {type:"fill",q:"A digital __________ is a log of information you leave online.",opts:["footprint","filter","engine"],a:"footprint",why:"Digital footprint: a log of information left online."},
+    {type:"fill",q:"If something online upsets you, tell a __________ adult.",opts:["trusted","online","digital"],a:"trusted",why:"Tell a trusted adult if something feels unsafe."},
+    {type:"tf",q:"The offline world needs a digital device.",a:false,why:"The offline world does not need a digital device."},
+    {type:"tf",q:"The online world is the internet accessed with a device.",a:true,why:"Online world: the internet accessed with a digital device."},
+    {type:"tf",q:"A survey is a type of image.",a:false,why:"A survey is a set of questions to gather information."},
+    {type:"tf",q:"Data is a collection of information or results.",a:true,why:"Data: a collection of information or results."},
+    {type:"tf",q:"Crop removes unwanted parts of an image.",a:true,why:"Crop: takes away unwanted objects from around the image."},
+    {type:"tf",q:"A filter changes the size of an image.",a:false,why:"Filter changes colours or adds effects; resize changes size."},
+    {type:"tf",q:"You should tell a trusted adult if something upsets you online.",a:true,why:"Always tell a trusted adult if something feels unsafe."},
+    {type:"tf",q:"A digital footprint is a type of shoe.",a:false,why:"Digital footprint: a log of information left online."},
+    {type:"tf",q:"Online shops are never open.",a:false,why:"Online shops are open all the time."},
+    {type:"tf",q:"Word processing software is good for making posters.",a:true,why:"Word processing or publishing software is best for posters."},
+    {type:"match",q:"Match each key term with its correct definition.",pairs:[["Offline world","The world around you without a digital device."],["Online world","The internet accessed with a device."],["Survey","A set of questions to gather information."],["Data","A collection of information or results."],["Search engine","Finds web pages using keywords."],["Crop","Removes unwanted parts of an image."],["Filter","Changes colours or adds effects."],["Resize","Changes the size of an image."],["Digital footprint","A log of information left online."],["Trusted adult","A responsible adult who can help."]],why:"Review the vocabulary list in the study notes."},
+    {type:"short",q:"Explain the difference between the online and offline worlds.",a:"The offline world is all around you and does not need a digital device. The online world is the internet, which you connect to using a digital device.",why:"A good answer distinguishes the two worlds clearly."},
+    {type:"short",q:"What is a survey? Give one example question.",a:"A survey is a set of questions to gather information. Example: Do you prefer shopping online or offline?",why:"A good answer defines a survey with an example."},
+    {type:"short",q:"What does a search engine do?",a:"A search engine finds web pages using keywords or phrases.",why:"A good answer explains the purpose of a search engine."},
+    {type:"short",q:"What is the difference between crop and resize?",a:"Crop removes unwanted parts of an image; resize changes the size of the image.",why:"A good answer contrasts crop and resize."},
+    {type:"short",q:"What should you do if a stranger online asks for your phone number?",a:"Do not give your phone number and tell a trusted adult about the contact.",why:"A good answer explains the safe action."},
+    {type:"short",q:"What is a digital footprint?",a:"A digital footprint is a log of all the information you leave behind when visiting websites.",why:"A good answer defines a digital footprint."},
+    {type:"short",q:"Why should you use a sensible filename for your work?",a:"So you can easily find and identify your file later.",why:"A good answer explains the purpose of sensible filenames."},
+    {type:"short",q:"Give two ways to make key information stand out on a poster.",a:"Use bold text and bullet points to make key information stand out.",why:"A good answer gives two formatting tips."},
+    {type:"short",q:"What is one benefit of online shopping?",a:"Online shops are open all the time and offer more choice.",why:"A good answer gives one benefit."},
+    {type:"short",q:"What is one benefit of offline shopping?",a:"You can see and try items in person before buying.",why:"A good answer gives one benefit."}
+  ]
+},
+{
+  id:2,title:"Digital Creativity – Green Screen Video",
+  sub:"Making a video with layers, scripts and green screen effects",
+  lessons:[
+    ["What is a green screen?","A green screen allows a background to be added to a video. The actor stands in front of a plain green background, which is replaced during editing."],
+    ["Layers in video","The background is the layer behind everything. The foreground is the layer closest to the camera. Characters appear between these layers."],
+    ["Recounts","A recount should be about facts because you are recounting a real event. Recounts can be written (news articles, diaries) or verbal (videos, podcasts)."],
+    ["Recount questions","A good recount answers: What happened? When did it happen? Where did it happen? Who was there? Why did it happen?"],
+    ["Scripts and characters","A script plans what each character will say. Characters are the people in the video. The background is the images behind the characters or presenter."],
+    ["Roles in video production","The camera operator controls the camera. The presenter talks to the camera. The editor edits the video after it has been recorded."],
+    ["Recording tips","Keep the camera still (a tripod may help), do not cover the microphone, speak loudly and clearly, look at the camera, and make sure the whole background is green."],
+    ["Editing tools","Trim/crop cuts parts of the clip from the beginning or end. Split breaks the video into parts. Delete removes unwanted parts. Undo puts things back to how they were."],
+    ["Planning a video","Plan the introduction, main story, ending, movements, speech and emotions. Use the questions what, when, where, who and why."],
+    ["Completing the video","Arrange clips, replace the green background, add titles and captions, then export the finished video."]
+  ],
+  vocab:[["Green screen","A plain coloured background replaced in editing."],["Background","The layer behind everything."],["Foreground","The layer closest to the camera."],["Script","What a character is going to say."],["Character","A person in the video."],["Trim/crop","Cut parts from the beginning or end of a clip."],["Split","Break the video into parts."],["Delete","Remove parts you do not want."],["Undo","Put things back to how they were."],["Recount","A factual account of a real event."]],
+  questions:[
+    {type:"mcq",q:"What does a green screen allow you to do?",opts:["Add a background to a video","Change the camera","Record sound only"],a:0,why:"A green screen allows a background to be added to a video."},
+    {type:"mcq",q:"What is the background layer?",opts:["The layer behind everything","The layer closest to the camera","A type of script"],a:0,why:"Background: the layer behind everything."},
+    {type:"mcq",q:"What is the foreground layer?",opts:["The layer closest to the camera","The layer behind everything","A type of character"],a:0,why:"Foreground: the layer closest to the camera."},
+    {type:"mcq",q:"What should a recount be about?",opts:["Facts about a real event","Imaginary events","A made-up story"],a:0,why:"A recount should be about facts because you are recounting a real event."},
+    {type:"mcq",q:"What is a script?",opts:["What the character is going to say","The background image","The camera position"],a:0,why:"Script: what the character is going to say."},
+    {type:"mcq",q:"Who controls the camera?",opts:["The camera operator","The presenter","The editor"],a:0,why:"The camera operator controls the camera."},
+    {type:"mcq",q:"What does the editor do?",opts:["Edits the video after recording","Talks to the camera","Controls the camera"],a:0,why:"The editor edits the video after it has been recorded."},
+    {type:"mcq",q:"What should you do with the microphone?",opts:["Do not cover it","Cover it","Turn it off"],a:0,why:"Do not cover the microphone so you can be heard."},
+    {type:"mcq",q:"What does trim/crop do?",opts:["Cuts parts from the beginning or end","Breaks the video into parts","Removes unwanted parts"],a:0,why:"Trim/crop cuts out parts of the clip from the beginning or end."},
+    {type:"mcq",q:"What does split do?",opts:["Breaks the video into one or more parts","Cuts the beginning or end","Puts things back"],a:0,why:"Split breaks up the video file into one or more parts."},
+    {type:"mcq",q:"What does undo do?",opts:["Puts things back to how they were","Deletes the video","Splits the video"],a:0,why:"Undo puts things back to how they were before the last change."},
+    {type:"mcq",q:"What should the whole background be during filming?",opts:["Green","Red","Blue"],a:0,why:"Make sure your whole background is the colour green."},
+    {type:"mcq",q:"What questions should a recount answer?",opts:["What, when, where, who, why","How much, how many","Which colour, which shape"],a:0,why:"A good recount answers what, when, where, who and why."},
+    {type:"mcq",q:"What are characters in a video?",opts:["The people in the video","The background images","The editing tools"],a:0,why:"Characters: any people in the video."},
+    {type:"mcq",q:"Why should the camera stay still?",opts:["So the video is not shaky","To make it louder","To change colours"],a:0,why:"Keep the camera still; a tripod may help."},
+    {type:"mcq",q:"What should you do before recording?",opts:["Plan the introduction, story and ending","Delete the video","Change the background"],a:0,why:"Plan the introduction, main story, ending, movements, speech and emotions."},
+    {type:"mcq",q:"What does delete do?",opts:["Removes parts you do not want","Adds parts","Changes colours"],a:0,why:"Delete removes parts that you do not want."},
+    {type:"mcq",q:"Where should characters appear in the layers?",opts:["Between the background and foreground","Behind the background","Only in the foreground"],a:0,why:"Characters appear between the background and foreground layers."},
+    {type:"mcq",q:"What is a good tip for speaking on camera?",opts:["Speak loudly and clearly","Whisper","Cover the microphone"],a:0,why:"Speak in a loud, clear voice."},
+    {type:"mcq",q:"What should you look at when presenting?",opts:["The camera","The floor","The wall"],a:0,why:"Look at the camera when you speak."},
+    {type:"fill",q:"A __________ screen allows a background to be added to a video.",opts:["green","blue","red"],a:"green",why:"Green screen: allows a background to be added to a video."},
+    {type:"fill",q:"The __________ is the layer behind everything.",opts:["background","foreground","script"],a:"background",why:"Background: the layer behind everything."},
+    {type:"fill",q:"The __________ is the layer closest to the camera.",opts:["foreground","background","character"],a:"foreground",why:"Foreground: the layer closest to the camera."},
+    {type:"fill",q:"A __________ plans what a character will say.",opts:["script","background","layer"],a:"script",why:"Script: what the character is going to say."},
+    {type:"fill",q:"A __________ is a person in the video.",opts:["character","background","script"],a:"character",why:"Character: a person in the video."},
+    {type:"fill",q:"__________ cuts parts from the beginning or end of a clip.",opts:["Trim","Split","Delete"],a:"Trim",why:"Trim/crop cuts out parts of the clip from the beginning or end."},
+    {type:"fill",q:"__________ breaks the video into parts.",opts:["Split","Trim","Undo"],a:"Split",why:"Split breaks up the video file into one or more parts."},
+    {type:"fill",q:"__________ removes parts you do not want.",opts:["Delete","Undo","Split"],a:"Delete",why:"Delete removes parts that you do not want."},
+    {type:"fill",q:"__________ puts things back to how they were.",opts:["Undo","Delete","Split"],a:"Undo",why:"Undo puts things back to how they were before the last change."},
+    {type:"fill",q:"A __________ is a factual account of a real event.",opts:["recount","script","filter"],a:"recount",why:"A recount should be about facts because you are recounting a real event."},
+    {type:"tf",q:"A green screen allows a background to be added to a video.",a:true,why:"Green screen: allows a background to be added to a video."},
+    {type:"tf",q:"The foreground is the layer behind everything.",a:false,why:"The foreground is the layer closest to the camera; background is behind."},
+    {type:"tf",q:"A recount should be about facts.",a:true,why:"A recount should be about facts because you are recounting a real event."},
+    {type:"tf",q:"A script plans what the character will say.",a:true,why:"Script: what the character is going to say."},
+    {type:"tf",q:"The camera operator edits the video after recording.",a:false,why:"The editor edits the video; the camera operator controls the camera."},
+    {type:"tf",q:"You should cover the microphone during recording.",a:false,why:"Do not cover the microphone so you can be heard."},
+    {type:"tf",q:"Trim cuts parts from the beginning or end of a clip.",a:true,why:"Trim/crop cuts out parts of the clip from the beginning or end."},
+    {type:"tf",q:"Split puts things back to how they were.",a:false,why:"Split breaks the video into parts; undo puts things back."},
+    {type:"tf",q:"The whole background should be green during filming.",a:true,why:"Make sure your whole background is the colour green."},
+    {type:"tf",q:"A recount should answer what, when, where, who and why.",a:true,why:"A good recount answers those questions."},
+    {type:"match",q:"Match each key term with its correct definition.",pairs:[["Green screen","A plain coloured background replaced in editing."],["Background","The layer behind everything."],["Foreground","The layer closest to the camera."],["Script","What a character is going to say."],["Character","A person in the video."],["Trim/crop","Cut parts from the beginning or end of a clip."],["Split","Break the video into parts."],["Delete","Remove parts you do not want."],["Undo","Put things back to how they were."],["Recount","A factual account of a real event."]],why:"Review the vocabulary list in the study notes."},
+    {type:"short",q:"What is a green screen and how is it used?",a:"A green screen is a plain green background. During editing, it is replaced with a different background image or video.",why:"A good answer explains the green screen effect."},
+    {type:"short",q:"What is the difference between background and foreground?",a:"The background is the layer behind everything; the foreground is the layer closest to the camera.",why:"A good answer contrasts the two layers."},
+    {type:"short",q:"What should a recount be about and why?",a:"A recount should be about facts because you are recounting a real event.",why:"A good answer explains that recounts are factual."},
+    {type:"short",q:"Name the five questions a good recount should answer.",a:"What happened? When did it happen? Where did it happen? Who was there? Why did it happen?",why:"A good answer lists the five recount questions."},
+    {type:"short",q:"What is a script? Why is it useful?",a:"A script plans what each character will say. It helps presenters know their lines and keeps the video organised.",why:"A good answer explains the purpose of a script."},
+    {type:"short",q:"What are the three main roles in video production?",a:"The camera operator, the presenter and the editor.",why:"A good answer lists the three roles."},
+    {type:"short",q:"Give two recording tips for a green screen video.",a:"Keep the camera still and make sure the whole background is green. Speak loudly and clearly.",why:"A good answer gives two practical tips."},
+    {type:"short",q:"What does split do in video editing?",a:"Split breaks the video file into one or more parts so you can edit sections separately.",why:"A good answer defines the split tool."},
+    {type:"short",q:"What should you plan before recording a video?",a:"Plan the introduction, main story, ending, movements, speech and emotions.",why:"A good answer lists planning elements."},
+    {type:"short",q:"What does undo do?",a:"Undo puts things back to how they were before the last change you made.",why:"A good answer defines undo."}
+  ]
+},
+{
+  id:3,title:"Organising and Presenting",
+  sub:"Creating effective presentations with transitions, animations and feedback",
+  lessons:[
+    ["What is a presentation?","A presentation is a talk supported by slides. Examples include class presentations, school assemblies and teaching lessons."],
+    ["Presentation software","Presentation software (like PowerPoint) is useful for displaying images and text while presenting. Give your file a sensible name."],
+    ["File, Insert and Design tabs","File: opening, closing and saving presentations. Insert: tools for adding text, images and shapes. Design: changing the background and theme."],
+    ["Backgrounds and fills","Solid fill, gradient fill, pattern fill, texture fill and picture fill are different ways to style a slide background."],
+    ["Transitions","Transitions are how a presentation moves from one slide to another. Examples: fade, push, wipe, split, reveal."],
+    ["Animations","Animation makes text and objects appear and disappear on a slide. Examples: appear, fade, fly in, wipe."],
+    ["Planning a presentation","Ask: What headings? What information on each slide? Do you need photos, drawings or diagrams? How many slides are needed?"],
+    ["Improving slides","Change the background, font style, text colour, and use animation. Add images and shorten text to key points."],
+    ["Presenting tips","Look at your audience, speak slowly and clearly, stand where you can be seen, and do not stand in front of your slides."],
+    ["Feedback","Feedback is telling someone what you like in their work and what they could improve. Check font readability, text contrast and image relevance."]
+  ],
+  vocab:[["Presentation","A talk supported by slides."],["Slide","A page in a presentation."],["Transition","How a presentation moves from one slide to another."],["Animation","Makes text and objects appear or disappear."],["Font","The style of text."],["Feedback","Telling someone what you like and what to improve."],["Background","The design behind the content on a slide."],["Layout","The arrangement of text and images on a slide."],["Audience","The people watching the presentation."],["Slide plan","A plan for what goes on each slide."]],
+  questions:[
+    {type:"mcq",q:"What is a presentation?",opts:["A talk supported by slides","A type of image","A search engine"],a:0,why:"A presentation is a talk supported by slides."},
+    {type:"mcq",q:"Which tab is used for adding text and images?",opts:["Insert","File","Design"],a:0,why:"Insert: tools for adding text, images and shapes."},
+    {type:"mcq",q:"Which tab changes the background and theme?",opts:["Design","Insert","File"],a:0,why:"Design: changing the background and theme of a presentation."},
+    {type:"mcq",q:"What is a transition?",opts:["How a presentation moves from one slide to another","How text appears","A type of font"],a:0,why:"Transitions are how a presentation moves from one slide to another."},
+    {type:"mcq",q:"What is an animation?",opts:["Makes text and objects appear or disappear","Moves between slides","Changes the background"],a:0,why:"Animation is used to make text and objects appear and disappear on a slide."},
+    {type:"mcq",q:"What is feedback?",opts:["Telling someone what you like and what to improve","A type of slide","A font style"],a:0,why:"Feedback is telling someone about the things you like in their work and what they could improve."},
+    {type:"mcq",q:"Why should you look at your audience?",opts:["To engage them","To read your slides","To hide your face"],a:0,why:"Look at your audience when presenting."},
+    {type:"mcq",q:"What should you do before presenting?",opts:["Check that text is easy to read","Use many animations","Hide the slides"],a:0,why:"Check that the font is clear and easy to read."},
+    {type:"mcq",q:"What is a slide plan?",opts:["A plan for what goes on each slide","A type of transition","A background colour"],a:0,why:"A slide plan decides what information goes on each slide."},
+    {type:"mcq",q:"What should you do if there is a lot of text on a slide?",opts:["Break it up with bullet points","Make the text smaller","Remove all images"],a:0,why:"If there is a lot of text, break it up by using bullet points."},
+    {type:"mcq",q:"Which is a good font choice for a presentation?",opts:["A clear, easy-to-read font","A tiny decorative font","A font that blends into the background"],a:0,why:"The font used should be clear and easy to read."},
+    {type:"mcq",q:"What should the text colour do?",opts:["Stand out against the background","Match the background","Be very small"],a:0,why:"The colour of the text needs to stand out against the background colour."},
+    {type:"mcq",q:"Why should images match the topic?",opts:["So they support the information on the slide","To make the slides longer","To add more colours"],a:0,why:"Images should match the topic of the slide."},
+    {type:"mcq",q:"What is a good presenting habit?",opts:["Speak slowly and clearly","Stand in front of your slides","Read every word from the screen"],a:0,why:"Speak slowly and clearly, and do not stand in front of your slides."},
+    {type:"mcq",q:"What does 'File' tab help with?",opts:["Opening, closing and saving presentations","Adding images","Changing colours"],a:0,why:"File: opening, closing and saving presentations."},
+    {type:"mcq",q:"What is a pattern fill?",opts:["A way to style a slide background","A type of animation","A font"],a:0,why:"Pattern fill is one of the background fill options."},
+    {type:"mcq",q:"What is one example of a transition?",opts:["Fade","Appear","Bold"],a:0,why:"Fade, push, wipe, split and reveal are transition examples."},
+    {type:"mcq",q:"What is one example of an animation?",opts:["Fly in","Fade between slides","Solid fill"],a:0,why:"Appear, fade, fly in and wipe are animation examples."},
+    {type:"mcq",q:"Why is feedback useful?",opts:["It helps improve your work","It makes slides longer","It adds animations"],a:0,why:"Feedback tells you what you like and what you could improve."},
+    {type:"mcq",q:"What should you check before presenting?",opts:["That the audience can read your text","That you have used many fonts","That the slides are hidden"],a:0,why:"Make sure your audience can read your text."},
+    {type:"fill",q:"A __________ is a talk supported by slides.",opts:["presentation","transition","font"],a:"presentation",why:"Presentation: a talk supported by slides."},
+    {type:"fill",q:"A __________ is a page in a presentation.",opts:["slide","transition","font"],a:"slide",why:"Slide: a page in a presentation."},
+    {type:"fill",q:"A __________ is how a presentation moves from one slide to another.",opts:["transition","animation","font"],a:"transition",why:"Transition: how a presentation moves from one slide to another."},
+    {type:"fill",q:"An __________ makes text and objects appear or disappear.",opts:["animation","transition","slide"],a:"animation",why:"Animation: makes text and objects appear and disappear."},
+    {type:"fill",q:"A __________ is the style of text.",opts:["font","slide","transition"],a:"font",why:"Font: the style of text."},
+    {type:"fill",q:"__________ is telling someone what you like and what to improve.",opts:["Feedback","A transition","A slide"],a:"Feedback",why:"Feedback: telling someone what you like and what to improve."},
+    {type:"fill",q:"The __________ is the design behind the content on a slide.",opts:["background","font","transition"],a:"background",why:"Background: the design behind the content."},
+    {type:"fill",q:"The __________ is the arrangement of text and images on a slide.",opts:["layout","font","transition"],a:"layout",why:"Layout: the arrangement of text and images."},
+    {type:"fill",q:"The __________ is the people watching the presentation.",opts:["audience","slide","font"],a:"audience",why:"Audience: the people watching the presentation."},
+    {type:"fill",q:"A __________ plan decides what goes on each slide.",opts:["slide","font","transition"],a:"slide",why:"Slide plan: a plan for what goes on each slide."},
+    {type:"tf",q:"A presentation is a talk supported by slides.",a:true,why:"Presentation: a talk supported by slides."},
+    {type:"tf",q:"The Insert tab changes the background and theme.",a:false,why:"The Design tab changes background and theme; Insert adds text and images."},
+    {type:"tf",q:"A transition moves between slides.",a:true,why:"Transition: how a presentation moves from one slide to another."},
+    {type:"tf",q:"An animation changes the background colour.",a:false,why:"Animation makes text and objects appear or disappear."},
+    {type:"tf",q:"Feedback tells someone what you like and what to improve.",a:true,why:"Feedback: telling someone what you like and what to improve."},
+    {type:"tf",q:"You should stand in front of your slides.",a:false,why:"Do not stand in front of your slides."},
+    {type:"tf",q:"Text should stand out against the background.",a:true,why:"The colour of the text needs to stand out against the background."},
+    {type:"tf",q:"Images should match the topic of the slide.",a:true,why:"Images should match the information on the slide."},
+    {type:"tf",q:"You should use as many animations as possible.",a:false,why:"Do not add too many animations as it can be too distracting."},
+    {type:"tf",q:"A slide plan decides what goes on each slide.",a:true,why:"A slide plan decides what information goes on each slide."},
+    {type:"match",q:"Match each key term with its correct definition.",pairs:[["Presentation","A talk supported by slides."],["Slide","A page in a presentation."],["Transition","How a presentation moves between slides."],["Animation","Makes text and objects appear or disappear."],["Font","The style of text."],["Feedback","Telling someone what you like and what to improve."],["Background","The design behind the content."],["Layout","The arrangement of text and images."],["Audience","The people watching the presentation."],["Slide plan","A plan for what goes on each slide."]],why:"Review the vocabulary list in the study notes."},
+    {type:"short",q:"What is a presentation?",a:"A presentation is a talk supported by slides, used to share information with an audience.",why:"A good answer defines a presentation."},
+    {type:"short",q:"What is the difference between a transition and an animation?",a:"A transition moves from one slide to another; an animation makes text or objects appear or disappear on a slide.",why:"A good answer contrasts transitions and animations."},
+    {type:"short",q:"What does the Insert tab do?",a:"The Insert tab has tools for adding text, images and shapes to slides.",why:"A good answer explains the Insert tab."},
+    {type:"short",q:"What does the Design tab do?",a:"The Design tab is used to change the background and theme of a presentation.",why:"A good answer explains the Design tab."},
+    {type:"short",q:"Give two presenting tips.",a:"Look at your audience and speak slowly and clearly.",why:"A good answer gives two presenting tips."},
+    {type:"short",q:"What is feedback and why is it useful?",a:"Feedback is telling someone what you like and what they could improve. It helps make work better.",why:"A good answer explains feedback."},
+    {type:"short",q:"Why should you break up long text on a slide?",a:"Breaking up text with bullet points makes it easier for the audience to read.",why:"A good answer explains the benefit of bullet points."},
+    {type:"short",q:"What should you check about fonts before presenting?",a:"Check that the font is clear, easy to read, and stands out against the background.",why:"A good answer lists font checks."},
+    {type:"short",q:"Why should images match the topic of a slide?",a:"So the images support the information and do not confuse the audience.",why:"A good answer explains the purpose of matching images."},
+    {type:"short",q:"What is a slide plan?",a:"A slide plan decides what headings and information will go on each slide.",why:"A good answer defines a slide plan."}
+  ]
+},
+{
+  id:4,title:"Introducing Algorithms & Programming",
+  sub:"Algorithms, sprites, debugging and backward programming",
+  lessons:[
+    ["What is an algorithm?","An algorithm is a set of steps to complete a task. Algorithms become programs when written as code and run on a computer."],
+    ["Sprites and the stage","A sprite is an object or character. The stage is the game area. The background is the image that covers the stage."],
+    ["Blocks and scripts","A block is a program instruction piece. A script is a set of instructions linked together. Undo/redo steps back or repeats the last action."],
+    ["Debugging","Debugging is finding and fixing errors in an algorithm so that it works correctly."],
+    ["Backward programming","Backward programming is a technique used to help plan a program. Start by thinking about what you want the program to do, then plan the steps needed."],
+    ["Characters and movement","Characters can move using directional arrows. Speech bubbles show what characters say."],
+    ["Looks blocks","Looks blocks change how a sprite looks. They can make a character speak or change costume."],
+    ["Fixing bugs","Common bugs include wrong numbers in move blocks and empty speech blocks. Check each block carefully."],
+    ["Planning programs","Plan what characters, background, movement, speech and story you want before coding."],
+    ["Testing programs","Test your program step by step. Compare what happens with what you planned, and fix any differences."]
+  ],
+  vocab:[["Algorithm","A set of steps to complete a task."],["Sprite","An object or character in a program."],["Stage","The game area where a project runs."],["Block","A program instruction piece."],["Script","A set of instructions linked together."],["Debugging","Finding and fixing errors in an algorithm."],["Backward programming","Planning a program by starting with the goal."],["Character","A person or animal in a program."],["Speech bubble","Shows what a character says."],["Looks block","Changes how a sprite looks."]],
+  questions:[
+    {type:"mcq",q:"What is an algorithm?",opts:["A set of steps to complete a task","A type of sprite","A game area"],a:0,why:"Algorithm: a set of steps to complete a task."},
+    {type:"mcq",q:"What is a sprite?",opts:["An object or character","The game area","A block"],a:0,why:"Sprite: an object or character."},
+    {type:"mcq",q:"What is the stage?",opts:["The game area","A type of block","A character"],a:0,why:"Stage: the game area."},
+    {type:"mcq",q:"What is a block?",opts:["A program instruction piece","The background","A character"],a:0,why:"Block: a program instruction piece."},
+    {type:"mcq",q:"What is a script?",opts:["A set of instructions linked together","A single block","The background"],a:0,why:"Script: a set of instructions linked together."},
+    {type:"mcq",q:"What is debugging?",opts:["Finding and fixing errors in an algorithm","Adding sprites","Changing the background"],a:0,why:"Debugging: finding and fixing errors so the algorithm works correctly."},
+    {type:"mcq",q:"What is backward programming?",opts:["Planning a program by starting with the goal","Running a program backwards","Deleting a program"],a:0,why:"Backward programming: start by thinking about what you want the program to do, then plan the steps."},
+    {type:"mcq",q:"What do directional arrows do?",opts:["Move characters","Change colours","Add sound"],a:0,why:"Characters can move using directional arrows."},
+    {type:"mcq",q:"What do speech bubbles show?",opts:["What a character says","The background","The stage"],a:0,why:"Speech bubbles show what characters say."},
+    {type:"mcq",q:"What do Looks blocks do?",opts:["Change how a sprite looks","Move the sprite","Change the background"],a:0,why:"Looks blocks change how a sprite looks, such as making it speak."},
+    {type:"mcq",q:"What is a common bug in a move block?",opts:["A wrong number","Too many colours","A missing background"],a:0,why:"A common bug is having the wrong number in a move block."},
+    {type:"mcq",q:"What is a common bug in a speech block?",opts:["The block is empty","The block is too long","The block is the wrong colour"],a:0,why:"They may forget to add 'Hello' in the speech block, leaving it empty."},
+    {type:"mcq",q:"When does an algorithm become a program?",opts:["When it is written as code and run","When it is drawn","When it is deleted"],a:0,why:"An algorithm becomes a program when written as code and run on a computer."},
+    {type:"mcq",q:"What should you do before coding?",opts:["Plan characters, background and story","Delete everything","Change the screen"],a:0,why:"Plan characters, background, character movement, speech and story before coding."},
+    {type:"mcq",q:"What should you do after writing a program?",opts:["Test it and fix any bugs","Delete it","Add more sprites"],a:0,why:"Test your program and fix any differences from the plan."},
+    {type:"mcq",q:"What does undo/redo do?",opts:["Steps back or repeats the last action","Adds a sprite","Changes the background"],a:0,why:"Undo/redo steps back or repeats the last action."},
+    {type:"mcq",q:"What is the background?",opts:["The image that covers the stage","A type of block","A character"],a:0,why:"Background: the image that covers the stage."},
+    {type:"mcq",q:"Why is planning important before coding?",opts:["It helps organise the steps needed","It makes the program longer","It adds sound"],a:0,why:"Planning helps organise the steps needed before coding."},
+    {type:"mcq",q:"What should you check in a move block?",opts:["The number of steps","The colour","The font"],a:0,why:"Check that the number in a move block is correct."},
+    {type:"mcq",q:"What should a speech block contain?",opts:["The words the character says","A number","A colour"],a:0,why:"The speech block should contain the words the character says."},
+    {type:"fill",q:"An __________ is a set of steps to complete a task.",opts:["algorithm","sprite","block"],a:"algorithm",why:"Algorithm: a set of steps to complete a task."},
+    {type:"fill",q:"A __________ is an object or character.",opts:["sprite","stage","block"],a:"sprite",why:"Sprite: an object or character."},
+    {type:"fill",q:"The __________ is the game area.",opts:["stage","sprite","block"],a:"stage",why:"Stage: the game area."},
+    {type:"fill",q:"A __________ is a program instruction piece.",opts:["block","sprite","script"],a:"block",why:"Block: a program instruction piece."},
+    {type:"fill",q:"A __________ is a set of instructions linked together.",opts:["script","block","sprite"],a:"script",why:"Script: a set of instructions linked together."},
+    {type:"fill",q:"__________ is finding and fixing errors in an algorithm.",opts:["Debugging","Backward programming","Testing"],a:"Debugging",why:"Debugging: finding and fixing errors."},
+    {type:"fill",q:"__________ programming starts by thinking about the goal.",opts:["Backward","Forward","Reverse"],a:"Backward",why:"Backward programming starts with the goal and plans the steps."},
+    {type:"fill",q:"__________ blocks change how a sprite looks.",opts:["Looks","Motion","Sound"],a:"Looks",why:"Looks blocks change how a sprite looks."},
+    {type:"fill",q:"A __________ bubble shows what a character says.",opts:["speech","thought","word"],a:"speech",why:"Speech bubbles show what characters say."},
+    {type:"fill",q:"An algorithm becomes a __________ when written as code and run.",opts:["program","sprite","block"],a:"program",why:"An algorithm becomes a program when written as code and run."},
+    {type:"tf",q:"An algorithm is a set of steps to complete a task.",a:true,why:"Algorithm: a set of steps to complete a task."},
+    {type:"tf",q:"A sprite is the game area.",a:false,why:"A sprite is an object or character; the stage is the game area."},
+    {type:"tf",q:"A script is a set of instructions linked together.",a:true,why:"Script: a set of instructions linked together."},
+    {type:"tf",q:"Debugging means finding and fixing errors.",a:true,why:"Debugging: finding and fixing errors in an algorithm."},
+    {type:"tf",q:"Backward programming starts with the goal.",a:true,why:"Backward programming starts by thinking about what you want the program to do."},
+    {type:"tf",q:"Looks blocks move the sprite.",a:false,why:"Looks blocks change how a sprite looks; motion blocks move it."},
+    {type:"tf",q:"Speech bubbles show what a character says.",a:true,why:"Speech bubbles show what characters say."},
+    {type:"tf",q:"A common bug is an empty speech block.",a:true,why:"Forgetting to add words leaves the speech block empty."},
+    {type:"tf",q:"An algorithm becomes a program when it is drawn.",a:false,why:"An algorithm becomes a program when written as code and run."},
+    {type:"tf",q:"You should test your program after writing it.",a:true,why:"Test and fix any bugs after writing the program."},
+    {type:"match",q:"Match each key term with its correct definition.",pairs:[["Algorithm","A set of steps to complete a task."],["Sprite","An object or character in a program."],["Stage","The game area where a project runs."],["Block","A program instruction piece."],["Script","A set of instructions linked together."],["Debugging","Finding and fixing errors in an algorithm."],["Backward programming","Planning a program by starting with the goal."],["Character","A person or animal in a program."],["Speech bubble","Shows what a character says."],["Looks block","Changes how a sprite looks."]],why:"Review the vocabulary list in the study notes."},
+    {type:"short",q:"What is an algorithm?",a:"An algorithm is a set of steps to complete a task. It becomes a program when written as code and run on a computer.",why:"A good answer defines an algorithm."},
+    {type:"short",q:"What is the difference between a sprite and the stage?",a:"A sprite is an object or character; the stage is the game area where the project runs.",why:"A good answer contrasts sprite and stage."},
+    {type:"short",q:"What is debugging?",a:"Debugging is finding and fixing errors in an algorithm so that it works correctly.",why:"A good answer defines debugging."},
+    {type:"short",q:"What is backward programming?",a:"Backward programming is a planning technique: start by thinking about what you want the program to do, then plan the steps needed.",why:"A good answer explains backward programming."},
+    {type:"short",q:"What do Looks blocks do?",a:"Looks blocks change how a sprite looks, such as making it speak or change costume.",why:"A good answer explains Looks blocks."},
+    {type:"short",q:"What do speech bubbles show?",a:"Speech bubbles show what a character says.",why:"A good answer defines speech bubbles."},
+    {type:"short",q:"What is a common bug in a move block?",a:"A wrong number in a move block, such as moving 2 steps instead of 3.",why:"A good answer gives a common bug example."},
+    {type:"short",q:"Why is planning important before coding?",a:"Planning helps organise the characters, background, movement, speech and story before writing code.",why:"A good answer explains the importance of planning."},
+    {type:"short",q:"What should you do after writing a program?",a:"Test the program step by step, compare with the plan, and fix any bugs.",why:"A good answer explains testing and fixing."},
+    {type:"short",q:"What is a script?",a:"A script is a set of instructions linked together to make a program.",why:"A good answer defines a script."}
+  ]
+},
+{
+  id:5,title:"Programming – Turtle World: The Best Route",
+  sub:"Turtle commands, routes and planning algorithms",
+  lessons:[
+    ["Turtle commands","Forward (fd) moves the turtle in the direction it is facing. Backward (bk) moves it back. Left (lt) turns 90 degrees left. Right (rt) turns 90 degrees right. Clear screen (cs) clears the drawing."],
+    ["Planning a route","A route is a path from one place to another. Plan the route before entering commands into the turtle."],
+    ["Writing algorithms","Write your algorithm down step by step before entering it. Remember to press 'clear' before entering a new program."],
+    ["Shortcuts","fd, bk, lt, rt and cs are shortcuts for forward, backward, left, right and clear screen."],
+    ["Following a route","Check which way the turtle is facing first. Then enter the commands and press 'Go' to start the program."],
+    ["Finding the best route","The shortest-looking route may use lots of commands. A longer-looking route may use fewer commands and be more efficient."],
+    ["Drawing letters","Turtle commands can draw letters and shapes on screen."],
+    ["Checking your route","After running the program, check if the turtle reached the correct destination. If not, debug the commands."],
+    ["Comparing routes","Compare two routes by counting the commands used. The best route uses fewer commands while still reaching the destination."],
+    ["Testing and improving","Test your route, fix any mistakes, and try to find an even better route."]
+  ],
+  vocab:[["Forward (fd)","Moves the turtle forward."],["Backward (bk)","Moves the turtle backward."],["Left (lt)","Turns the turtle 90 degrees left."],["Right (rt)","Turns the turtle 90 degrees right."],["Clear screen (cs)","Clears the drawing."],["Route","A path from one place to another."],["Algorithm","A set of steps to complete a task."],["Turtle","A programmable drawing tool."],["Debug","Find and fix mistakes in a program."],["Best route","The route that uses the fewest commands."]],
+  questions:[
+    {type:"mcq",q:"What does 'fd' stand for?",opts:["Forward","Backward","Left"],a:0,why:"fd = forward, moving the turtle in the direction it is facing."},
+    {type:"mcq",q:"What does 'bk' stand for?",opts:["Backward","Forward","Right"],a:0,why:"bk = backward, moving the turtle back."},
+    {type:"mcq",q:"What does 'lt' stand for?",opts:["Left","Right","Clear screen"],a:0,why:"lt = left, turning the turtle 90 degrees left."},
+    {type:"mcq",q:"What does 'rt' stand for?",opts:["Right","Left","Forward"],a:0,why:"rt = right, turning the turtle 90 degrees right."},
+    {type:"mcq",q:"What does 'cs' stand for?",opts:["Clear screen","Change speed","Current step"],a:0,why:"cs = clear screen, clearing the drawing."},
+    {type:"mcq",q:"What is a route?",opts:["A path from one place to another","A type of turtle","A command"],a:0,why:"Route: a path from one place to another."},
+    {type:"mcq",q:"What should you do before entering a new program?",opts:["Press 'clear'","Press 'go'","Delete the turtle"],a:0,why:"Remember to press the 'clear' button before entering a new program."},
+    {type:"mcq",q:"What should you check first before entering commands?",opts:["Which way the turtle is facing","The colour of the screen","The size of the turtle"],a:0,why:"Check which way the turtle is facing before entering commands."},
+    {type:"mcq",q:"What is the best route?",opts:["The route that uses the fewest commands","The longest route","The route with the most turns"],a:0,why:"The best route uses fewer commands while still reaching the destination."},
+    {type:"mcq",q:"What should you do if the turtle does not reach the destination?",opts:["Debug the commands","Delete the turtle","Change the screen"],a:0,why:"If the turtle does not reach the destination, debug the commands."},
+    {type:"mcq",q:"What does 'clear screen' do?",opts:["Clears the drawing","Clears the commands","Clears the turtle"],a:0,why:"Clear screen clears the drawing."},
+    {type:"mcq",q:"What is a turtle in programming?",opts:["A programmable drawing tool","A real animal","A type of screen"],a:0,why:"The turtle is a programmable drawing tool."},
+    {type:"mcq",q:"Why write your algorithm down first?",opts:["To plan the steps before entering commands","To make it longer","To add colour"],a:0,why:"Write your algorithm down step by step before entering it."},
+    {type:"mcq",q:"What button starts the turtle program?",opts:["Go","Clear","Stop"],a:0,why:"Press the 'Go' button to start your program."},
+    {type:"mcq",q:"What can turtle commands draw?",opts:["Letters and shapes","Only circles","Only squares"],a:0,why:"Turtle commands can draw letters and shapes on screen."},
+    {type:"mcq",q:"How do you compare two routes?",opts:["Count the commands used","Count the turns only","Measure the screen"],a:0,why:"Compare routes by counting the commands used."},
+    {type:"mcq",q:"What should you do after testing a route?",opts:["Fix mistakes and try to improve it","Delete it","Add more commands"],a:0,why:"Test your route, fix mistakes and try to find an even better route."},
+    {type:"mcq",q:"What does 90 degrees mean for a turn?",opts:["A quarter turn","A half turn","A full turn"],a:0,why:"Left and right turns are 90 degrees, a quarter turn."},
+    {type:"mcq",q:"What is debugging?",opts:["Finding and fixing mistakes","Adding more commands","Changing the turtle"],a:0,why:"Debugging: finding and fixing mistakes in a program."},
+    {type:"mcq",q:"Why is the best route useful?",opts:["It uses fewer commands","It looks longer","It has more turns"],a:0,why:"The best route uses fewer commands while still reaching the destination."},
+    {type:"fill",q:"__________ moves the turtle forward.",opts:["fd","bk","lt"],a:"fd",why:"fd = forward."},
+    {type:"fill",q:"__________ moves the turtle backward.",opts:["bk","fd","rt"],a:"bk",why:"bk = backward."},
+    {type:"fill",q:"__________ turns the turtle 90 degrees left.",opts:["lt","rt","fd"],a:"lt",why:"lt = left turn."},
+    {type:"fill",q:"__________ turns the turtle 90 degrees right.",opts:["rt","lt","bk"],a:"rt",why:"rt = right turn."},
+    {type:"fill",q:"__________ clears the drawing.",opts:["cs","fd","lt"],a:"cs",why:"cs = clear screen."},
+    {type:"fill",q:"A __________ is a path from one place to another.",opts:["route","turtle","command"],a:"route",why:"Route: a path from one place to another."},
+    {type:"fill",q:"An __________ is a set of steps to complete a task.",opts:["algorithm","route","turtle"],a:"algorithm",why:"Algorithm: a set of steps to complete a task."},
+    {type:"fill",q:"A __________ is a programmable drawing tool.",opts:["turtle","route","command"],a:"turtle",why:"Turtle: a programmable drawing tool."},
+    {type:"fill",q:"__________ means finding and fixing mistakes in a program.",opts:["Debugging","Planning","Testing"],a:"Debugging",why:"Debugging: finding and fixing mistakes."},
+    {type:"fill",q:"The __________ route uses the fewest commands.",opts:["best","longest","shortest"],a:"best",why:"The best route uses fewer commands."},
+    {type:"tf",q:"fd moves the turtle forward.",a:true,why:"fd = forward."},
+    {type:"tf",q:"bk moves the turtle forward.",a:false,why:"bk = backward; fd = forward."},
+    {type:"tf",q:"lt turns the turtle left.",a:true,why:"lt = left turn."},
+    {type:"tf",q:"rt turns the turtle left.",a:false,why:"rt = right turn; lt = left turn."},
+    {type:"tf",q:"cs clears the screen.",a:true,why:"cs = clear screen."},
+    {type:"tf",q:"A route is a type of turtle.",a:false,why:"A route is a path from one place to another."},
+    {type:"tf",q:"You should press 'clear' before entering a new program.",a:true,why:"Remember to press 'clear' before entering a new program."},
+    {type:"tf",q:"The best route always looks the shortest.",a:false,why:"The best route uses fewer commands, even if it looks longer."},
+    {type:"tf",q:"Turtle commands can draw letters.",a:true,why:"Turtle commands can draw letters and shapes."},
+    {type:"tf",q:"You should debug if the turtle does not reach the destination.",a:true,why:"Debug the commands if the turtle does not reach the destination."},
+    {type:"match",q:"Match each key term with its correct definition.",pairs:[["Forward (fd)","Moves the turtle forward."],["Backward (bk)","Moves the turtle backward."],["Left (lt)","Turns the turtle 90 degrees left."],["Right (rt)","Turns the turtle 90 degrees right."],["Clear screen (cs)","Clears the drawing."],["Route","A path from one place to another."],["Algorithm","A set of steps to complete a task."],["Turtle","A programmable drawing tool."],["Debug","Find and fix mistakes in a program."],["Best route","The route that uses the fewest commands."]],why:"Review the vocabulary list in the study notes."},
+    {type:"short",q:"What does 'fd' do?",a:"fd stands for forward. It moves the turtle in the direction it is facing.",why:"A good answer defines forward."},
+    {type:"short",q:"What does 'cs' do?",a:"cs stands for clear screen. It clears the drawing on the screen.",why:"A good answer defines clear screen."},
+    {type:"short",q:"What is a route?",a:"A route is a path from one place to another. In turtle programming, it is the path the turtle follows.",why:"A good answer defines a route."},
+    {type:"short",q:"Why should you press 'clear' before entering a new program?",a:"Pressing 'clear' removes the previous drawing so the new program starts with a clean screen.",why:"A good answer explains the purpose of clearing."},
+    {type:"short",q:"What is the best route?",a:"The best route is the one that uses the fewest commands while still reaching the destination.",why:"A good answer defines the best route."},
+    {type:"short",q:"What should you check before entering turtle commands?",a:"Check which way the turtle is facing before entering commands.",why:"A good answer explains the first check."},
+    {type:"short",q:"What should you do if the turtle does not reach the destination?",a:"Debug the commands by checking each step and fixing any mistakes.",why:"A good answer explains debugging."},
+    {type:"short",q:"How do you compare two routes?",a:"Compare two routes by counting the number of commands each one uses.",why:"A good answer explains route comparison."},
+    {type:"short",q:"What can turtle commands draw?",a:"Turtle commands can draw letters, shapes and paths on the screen.",why:"A good answer lists drawing possibilities."},
+    {type:"short",q:"Why is planning important before entering turtle commands?",a:"Planning helps you work out the steps and avoid mistakes before entering commands.",why:"A good answer explains the importance of planning."}
+  ]
+},
+{
+  id:6,title:"Networks",
+  sub:"Mobile phone networks, GPS and satellites",
+  lessons:[
+    ["What is a network?","A network is a group of people or things that are connected. Examples include family networks and friend networks."],
+    ["Mobile phone networks","Mobile phones connect to a network using phone masts. Phone masts connect to each other using underground wires."],
+    ["How calls work","A mobile phone sends a message to the nearest mast. The message travels from mast to mast until it reaches the mast nearest the receiver, then travels through the air to their phone."],
+    ["Smartphones","Many phones are smartphones. They can do many tasks as well as make calls, such as taking photos, sending emails and using apps."],
+    ["GPS","GPS stands for Global Positioning System. Satellites orbit the Earth and help devices find their exact location."],
+    ["Satellites","Satellites orbit the Earth. They are used for GPS, satellite navigation (satnav), and communication."],
+    ["Ground stations","Ground stations communicate with satellites. They have dishes, masts and motors to track satellites."],
+    ["Comparing networks","Mobile phone networks are needed to talk to friends and family when out of the home. Satellite networks are needed to find exact locations on the planet."],
+    ["Uses of networks","Networks help us communicate, find locations, share information and stay connected."],
+    ["Building models","When building models of masts or satellites, use materials safely and keep the area tidy."]
+  ],
+  vocab:[["Network","A group of people or things that are connected."],["Mobile network","A network that connects mobile phones using masts."],["Mast","A tall structure that sends and receives phone signals."],["GPS","Global Positioning System — uses satellites to find locations."],["Satellite","An object that orbits the Earth and helps with communication and location."],["Ground station","A station on Earth that communicates with satellites."],["Smartphone","A phone that can do many tasks as well as make calls."],["Cell","The area covered by one phone mast."],["Satnav","Satellite navigation — uses GPS to find routes."],["Underground wires","Wires that connect phone masts to each other."]],
+  questions:[
+    {type:"mcq",q:"What is a network?",opts:["A group of people or things that are connected","A type of phone","A satellite"],a:0,why:"Network: a group of people or things that are connected."},
+    {type:"mcq",q:"What connects mobile phones to the network?",opts:["Phone masts","Satellites","Underground wires only"],a:0,why:"Mobile phones connect to the network using phone masts."},
+    {type:"mcq",q:"How do phone masts connect to each other?",opts:["Using underground wires","Using satellites","Using Bluetooth"],a:0,why:"Phone masts connect to each other using underground wires."},
+    {type:"mcq",q:"What is a cell in a mobile network?",opts:["The area covered by one phone mast","A type of phone","A satellite"],a:0,why:"Each mast has its own area, called a cell."},
+    {type:"mcq",q:"What does GPS stand for?",opts:["Global Positioning System","General Phone System","Global Phone Service"],a:0,why:"GPS stands for Global Positioning System."},
+    {type:"mcq",q:"What do satellites help devices do?",opts:["Find their exact location","Make phone calls only","Send emails"],a:0,why:"Satellites help devices find their exact location using GPS."},
+    {type:"mcq",q:"What is a smartphone?",opts:["A phone that can do many tasks","A phone that only makes calls","A type of satellite"],a:0,why:"Smartphones can do many tasks as well as make calls."},
+    {type:"mcq",q:"What is a ground station?",opts:["A station on Earth that communicates with satellites","A phone mast","A type of phone"],a:0,why:"Ground stations communicate with satellites."},
+    {type:"mcq",q:"What are satellites used for?",opts:["GPS, satnav and communication","Only phone calls","Only emails"],a:0,why:"Satellites are used for GPS, satellite navigation and communication."},
+    {type:"mcq",q:"Why are mobile phone networks needed?",opts:["To talk to friends and family when out of the home","To find exact locations","To build models"],a:0,why:"Mobile phone networks are needed to talk to friends and family when out of the home."},
+    {type:"mcq",q:"Why are satellite networks needed?",opts:["To find exact locations on the planet","To make phone calls","To send emails"],a:0,why:"Satellite networks are needed to find exact locations on the planet."},
+    {type:"mcq",q:"What does a phone send to the nearest mast?",opts:["A message","A photo only","A satellite signal"],a:0,why:"A mobile phone sends a message to the nearest mast."},
+    {type:"mcq",q:"What happens after a message reaches the nearest mast to the receiver?",opts:["It travels through the air to their phone","It goes back to the sender","It stops"],a:0,why:"The message travels through the air to the receiver's phone."},
+    {type:"mcq",q:"What is satnav?",opts:["Satellite navigation","A type of phone","A satellite"],a:0,why:"Satnav stands for satellite navigation."},
+    {type:"mcq",q:"What do ground stations have?",opts:["Dishes, masts and motors","Only phones","Only satellites"],a:0,why:"Ground stations have dishes, masts and motors to track satellites."},
+    {type:"mcq",q:"What is an example of a network?",opts:["A family network","A single phone","A satellite"],a:0,why:"A network is a group of people or things that are connected, like a family."},
+    {type:"mcq",q:"What is one task a smartphone can do besides making calls?",opts:["Take photos","Only send texts","Only use GPS"],a:0,why:"Smartphones can take photos, send emails, use apps and more."},
+    {type:"mcq",q:"What do satellites orbit?",opts:["The Earth","The Moon","The Sun"],a:0,why:"Satellites orbit the Earth."},
+    {type:"mcq",q:"How do networks help us?",opts:["They help us communicate and find locations","They only help us play games","They only help us shop"],a:0,why:"Networks help us communicate, find locations and share information."},
+    {type:"mcq",q:"What should you remember when building models?",opts:["Use materials safely and keep the area tidy","Use as much glue as possible","Leave scissors on the floor"],a:0,why:"Be careful with scissors, put lids on glue and keep the area tidy."},
+    {type:"fill",q:"A __________ is a group of people or things that are connected.",opts:["network","phone","satellite"],a:"network",why:"Network: a group of people or things that are connected."},
+    {type:"fill",q:"Mobile phones connect to the network using phone __________.",opts:["masts","satellites","wires"],a:"masts",why:"Mobile phones connect using phone masts."},
+    {type:"fill",q:"Phone masts connect to each other using __________ wires.",opts:["underground","above-ground","satellite"],a:"underground",why:"Phone masts connect using underground wires."},
+    {type:"fill",q:"The area covered by one phone mast is called a __________.",opts:["cell","network","satellite"],a:"cell",why:"Each mast has its own area, called a cell."},
+    {type:"fill",q:"GPS stands for Global __________ System.",opts:["Positioning","Phone","Power"],a:"Positioning",why:"GPS: Global Positioning System."},
+    {type:"fill",q:"A __________ is an object that orbits the Earth.",opts:["satellite","mast","phone"],a:"satellite",why:"Satellite: an object that orbits the Earth."},
+    {type:"fill",q:"A __________ station communicates with satellites.",opts:["ground","phone","mast"],a:"ground",why:"Ground station: communicates with satellites."},
+    {type:"fill",q:"A __________ is a phone that can do many tasks.",opts:["smartphone","satellite","mast"],a:"smartphone",why:"Smartphone: a phone that can do many tasks."},
+    {type:"fill",q:"__________ is satellite navigation.",opts:["Satnav","GPS","A cell"],a:"Satnav",why:"Satnav: satellite navigation."},
+    {type:"fill",q:"A __________ is a tall structure that sends and receives phone signals.",opts:["mast","satellite","ground station"],a:"mast",why:"Mast: a tall structure that sends and receives phone signals."},
+    {type:"tf",q:"A network is a group of people or things that are connected.",a:true,why:"Network: a group of people or things that are connected."},
+    {type:"tf",q:"Mobile phones connect to the network using satellites only.",a:false,why:"Mobile phones connect using phone masts."},
+    {type:"tf",q:"Phone masts connect to each other using underground wires.",a:true,why:"Phone masts connect using underground wires."},
+    {type:"tf",q:"GPS stands for Global Positioning System.",a:true,why:"GPS: Global Positioning System."},
+    {type:"tf",q:"Satellites orbit the Moon.",a:false,why:"Satellites orbit the Earth."},
+    {type:"tf",q:"A smartphone can do many tasks as well as make calls.",a:true,why:"Smartphones can do many tasks as well as make calls."},
+    {type:"tf",q:"Ground stations communicate with satellites.",a:true,why:"Ground stations communicate with satellites."},
+    {type:"tf",q:"Mobile phone networks are needed to find exact locations.",a:false,why:"Satellite networks are needed to find exact locations."},
+    {type:"tf",q:"The area covered by one phone mast is called a cell.",a:true,why:"Each mast has its own area, called a cell."},
+    {type:"tf",q:"Satnav uses GPS to find routes.",a:true,why:"Satnav uses GPS to find routes."},
+    {type:"match",q:"Match each key term with its correct definition.",pairs:[["Network","A group of people or things that are connected."],["Mobile network","A network that connects mobile phones using masts."],["Mast","A tall structure that sends and receives phone signals."],["GPS","Global Positioning System — uses satellites to find locations."],["Satellite","An object that orbits the Earth."],["Ground station","A station on Earth that communicates with satellites."],["Smartphone","A phone that can do many tasks as well as make calls."],["Cell","The area covered by one phone mast."],["Satnav","Satellite navigation — uses GPS to find routes."],["Underground wires","Wires that connect phone masts to each other."]],why:"Review the vocabulary list in the study notes."},
+    {type:"short",q:"What is a network?",a:"A network is a group of people or things that are connected, such as a family network or a mobile phone network.",why:"A good answer defines a network with an example."},
+    {type:"short",q:"How do mobile phones connect to the network?",a:"Mobile phones connect to the network using phone masts. The phone sends a message to the nearest mast.",why:"A good answer explains the connection process."},
+    {type:"short",q:"How do phone masts connect to each other?",a:"Phone masts connect to each other using underground wires.",why:"A good answer explains mast connections."},
+    {type:"short",q:"What is GPS?",a:"GPS stands for Global Positioning System. It uses satellites to help devices find their exact location.",why:"A good answer defines GPS."},
+    {type:"short",q:"What do satellites do?",a:"Satellites orbit the Earth and are used for GPS, satellite navigation and communication.",why:"A good answer explains satellite uses."},
+    {type:"short",q:"What is a smartphone?",a:"A smartphone is a phone that can do many tasks as well as make calls, such as taking photos and using apps.",why:"A good answer defines a smartphone."},
+    {type:"short",q:"What is a ground station?",a:"A ground station is a station on Earth that communicates with satellites. It has dishes, masts and motors.",why:"A good answer defines a ground station."},
+    {type:"short",q:"Why are mobile phone networks needed?",a:"Mobile phone networks are needed to talk to friends and family when out of the home.",why:"A good answer explains the purpose of mobile networks."},
+    {type:"short",q:"Why are satellite networks needed?",a:"Satellite networks are needed to find exact locations on the planet.",why:"A good answer explains the purpose of satellite networks."},
+    {type:"short",q:"What is one safety tip when building models?",a:"Be careful with scissors and keep the modelling area tidy.",why:"A good answer gives a safety tip."}
+  ]
+}
+];
+
+/* APP STATE & RENDERING (Same as previous years) */
+let units = embeddedUnits, active = 1, view = 'home', filter = 'all', exam = null, timer = null;
+let progress = JSON.parse(localStorage.getItem('jsProgress_Y2') || '{}');
+const $ = s => document.querySelector(s);
+
+applyLoginState();
+render();
+
+function go(v) {
+  if (!studentName) { loginOverlay.classList.remove('hidden'); return; }
+  view = v;
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('active', b.dataset.view === v));
+  $('#hero').classList.toggle('hidden', v !== 'home');
+  $('.stats').classList.toggle('hidden', v !== 'home');
+  render();
+  scrollTo({top:0,behavior:'smooth'});
+  $('nav').classList.remove('open');
+}
+document.querySelectorAll('nav button').forEach(b => b.onclick = () => go(b.dataset.view));
+$('#menu').onclick = () => $('nav').classList.toggle('open');
+
+function tabs() {
+  return '<div class="tabs">' + units.map(u =>
+    `<button class="${u.id===active?'active':''}" onclick="active=${u.id};render()">${u.id}. ${u.title}</button>`
+  ).join('') + '</div>';
+}
+
+function render() {
+  if (!units.length || !studentName) return;
+  const u = units[active-1], v = $('#view');
+
+  if (view === 'home') {
+    v.innerHTML = `
+      <div class="head">
+        <label>YOUR LEARNING PATH</label>
+        <h2>Welcome back, ${escapeHtml(studentName)} 👋</h2>
+        <p class="muted">Choose a unit to study, practise, or take a timed assessment.</p>
+      </div>
+      <div class="grid">${units.map(x => `
+        <article class="card">
+          <div class="num">UNIT ${x.id}</div>
+          <h3>${x.title}</h3>
+          <p>${x.sub}</p>
+          <div>
+            <button onclick="active=${x.id};go('study')">Study notes ↗</button>
+            <button onclick="active=${x.id};go('exam')">Take exam →</button>
+          </div>
+        </article>`).join('')}
+      </div>
+      <div class="panel">
+        <label>EXAM STRUCTURE</label>
+        <h2>80 marks • 60 minutes</h2>
+        <p class="muted">20 multiple choice (20 marks) + 10 fill blanks (10) + 10 true/false (10) + 1 matching task worth 10 marks (10 pairs) + 10 short answers (30 marks; 3 each).</p>
+      </div>`;
+  }
+  else if (view === 'study') {
+    v.innerHTML = `
+      <div class="head">
+        <label>STUDY LIBRARY</label>
+        <h2>Study Notes</h2>
+        <p>Child-friendly explanations and key vocabulary.</p>
+      </div>
+      ${tabs()}
+      <div class="panel">
+        <label>UNIT ${u.id}</label>
+        <h2>${u.title}</h2>
+        <p class="muted">${u.sub}</p>
+        ${u.lessons.map((l,i) => `
+          <article class="lesson">
+            <label>LESSON ${i+1}</label>
+            <h3>${l[0]}</h3>
+            <p>${l[1]}</p>
+          </article>`).join('')}
+      </div>
+      <div class="panel">
+        <label>KEY VOCABULARY</label>
+        <div class="vocab">${u.vocab.map(x => `<div class="word"><b>${x[0]}</b>${x[1]}</div>`).join('')}</div>
+      </div>
+      <div class="callout">Study tip: explain each key idea in your own words, then practise without looking at the notes.</div>
+      <button class="gold" onclick="go('practice')">Practise this unit →</button>
+      <button onclick="go('exam')">Start exam</button>`;
+  }
+  else if (view === 'practice') {
+    const qs = u.questions.filter(q => filter === 'all' || q.type === filter);
+    v.innerHTML = `
+      <div class="head">
+        <label>PRACTICE STUDIO</label>
+        <h2>Workbook-style Practice</h2>
+        <p>Original questions aligned with unit themes. Check answers to see explanations.</p>
+      </div>
+      ${tabs()}
+      <div class="tabs">
+        ${[['all','All types'],['mcq','Multiple choice'],['fill','Fill blanks'],['tf','True / false'],['match','Matching'],['short','Short answer']].map(a =>
+          `<button class="${filter===a[0]?'active':''}" onclick="filter='${a[0]}';render()">${a[1]}</button>`
+        ).join('')}
+      </div>
+      <div class="callout">These are newly written practice questions, not a verbatim reproduction of Pearson workbook pages.</div>
+      <form id="pf">
+        ${qs.map((q,i) => qhtml(q,i,'p')).join('')}
+        <button class="gold">Check answers</button>
+      </form>
+      <div id="pr"></div>`;
+    $('#pf').onsubmit = e => {
+      e.preventDefault();
+      let c = 0;
+      qs.forEach((q,i) => {
+        const a = getanswer(q,i,'p'), ok = check(q,a);
+        if(ok) c++;
+        const el = $('#fbp'+i);
+        el.className = 'feedback ' + (ok?'good':'bad');
+        el.innerHTML = `<b>${ok?'Correct':'Review this answer'}.</b> ${answertext(q)} ${q.why}`;
+      });
+      $('#pr').innerHTML = `<div class="panel"><h2>${c}/${qs.length} correct</h2><div class="bar"><span style="width:${Math.round(c/qs.length*100)}%"></span></div><p class="muted">Review the feedback and try again.</p></div>`;
+    };
+  }
+  else if (view === 'exam') {
+    if (exam && !exam.done && exam.uid === active) { renderExam(); return; }
+    v.innerHTML = `
+      <div class="head">
+        <label>TIMED ASSESSMENT</label>
+        <h2>Unit Examination</h2>
+        <p>60-minute assessment with instant feedback.</p>
+      </div>
+      ${tabs()}
+      <div class="panel">
+        <h2>${u.title}</h2>
+        <div class="three">
+          <div><b>51</b><span>Tasks / 60 question parts</span></div>
+          <div><b>80</b><span>Total marks</span></div>
+          <div><b>60 min</b><span>Time allowed</span></div>
+        </div>
+        <p class="muted">20 MCQ + 10 fill blanks + 10 true/false + one matching task worth 10 marks (10 pairs) + 10 short answers = 60 question parts and 80 marks. Matching gives 10 marks when all ten pairs are correct.</p>
+        <button class="gold" onclick="startExam()">Begin exam →</button>
+      </div>`;
+  }
+  else if (view === 'progress') {
+    const done = units.filter(x => progress[x.id]);
+    v.innerHTML = `
+      <div class="head">
+        <label>LEARNING DASHBOARD</label>
+        <h2>${escapeHtml(studentName)}'s Progress</h2>
+        <p>Scores are saved only in this browser.</p>
+      </div>
+      <div class="three">
+        <div><b>${done.length}/6</b><span>Units attempted</span></div>
+        <div><b>${done.length?Math.round(done.reduce((s,x)=>s+progress[x.id].pct,0)/done.length):0}%</b><span>Average score</span></div>
+        <div><b>${done.filter(x=>progress[x.id].pct>=80).length}</b><span>Units at 80%+</span></div>
+      </div>
+      <div class="grid">${units.map(x => `
+        <article class="card">
+          <h3>${x.title}</h3>
+          <p>${progress[x.id]?`Last score: ${progress[x.id].pct}% (${progress[x.id].marks}/80)`:'Not attempted yet.'}</p>
+          <button onclick="active=${x.id};go('exam')">${progress[x.id]?'Retake':'Start'} exam →</button>
+        </article>`).join('')}
+      </div>
+      <button onclick="if(confirm('Clear saved scores?')){progress={};localStorage.removeItem('jsProgress_Y2');render()}">Reset saved progress</button>
+      <p class="muted">This front-end demo does not send scores to a teacher or server.</p>`;
+  }
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function qhtml(q,i,p) {
+  let h = '';
+  if (q.type === 'mcq') {
+    h = '<div class="options">' + q.opts.map((o,j) =>
+      `<label class="opt"><input type="radio" name="${p}${i}" value="${j}"> <span>${String.fromCharCode(65+j)}. ${o}</span></label>`
+    ).join('') + '</div>';
+  }
+  if (q.type === 'fill') {
+    h = `<p class="muted">Word bank: ${q.opts.join(' · ')}</p><input type="text" name="${p}${i}" placeholder="Type your answer">`;
+  }
+  if (q.type === 'tf') {
+    h = `<div class="options">
+      <label class="opt"><input type="radio" name="${p}${i}" value="true"> <span>True</span></label>
+      <label class="opt"><input type="radio" name="${p}${i}" value="false"> <span>False</span></label>
+    </div>`;
+  }
+  if (q.type === 'match') {
+    h = '<div class="pairs">' + q.pairs.map((x,j) =>
+      `<div class="word"><b>${j+1}. ${x[0]}</b>
+        <select name="${p}${i}_${j}">
+          <option value="">Choose definition…</option>
+          ${q.pairs.map((y,k) => `<option value="${k}">${y[1]}</option>`).join('')}
+        </select>
+      </div>`
+    ).join('') + '</div>';
+  }
+  if (q.type === 'short') {
+    h = `<textarea name="${p}${i}" rows="4" placeholder="Answer in your own words"></textarea>`;
+  }
+  const marks = q.type === 'short' ? '3 marks' : q.type === 'match' ? '10 marks' : '1 mark';
+  return `<article class="q">
+    <div class="qtop">QUESTION ${i+1} · ${q.type.toUpperCase()} · ${marks}</div>
+    <h3>${q.q}</h3>
+    ${h}
+    <div id="fb${p}${i}"></div>
+  </article>`;
+}
+
+function getanswer(q,i,p) {
+  if (q.type === 'match') return q.pairs.map((_,j) => $(`[name="${p}${i}_${j}"]`).value);
+  if (q.type === 'short' || q.type === 'fill') return $(`[name="${p}${i}"]`)?.value || '';
+  return $(`[name="${p}${i}"]:checked`)?.value;
+}
+
+function norm(s) {
+  return String(s ?? '').toLowerCase().trim().replace(/[.,!?;:'“”]/g,'').replace(/\s+/g,' ');
+}
+
+function check(q,a) {
+  if (q.type === 'mcq') return a !== undefined && Number(a) === q.a;
+  if (q.type === 'tf') return a !== undefined && (a === 'true') === q.a;
+  if (q.type === 'fill') return norm(a) === norm(q.a);
+  if (q.type === 'match') return Array.isArray(a) && a.every((x,i) => x !== '' && Number(x) === i);
+  const words = norm(q.a).split(' ').filter(w => w.length > 4);
+  return norm(a).length > 20 && words.filter(w => norm(a).includes(w)).length >= 1;
+}
+
+function answertext(q) {
+  if (q.type === 'mcq') return `Correct answer: ${q.opts[q.a]}.`;
+  if (q.type === 'tf') return `Correct answer: ${q.a?'True':'False'}.`;
+  if (q.type === 'fill') return `Suggested answer: ${q.a}.`;
+  if (q.type === 'match') return 'All ten pairs must be correct for full marks.';
+  return `Model answer: ${q.a}`;
+}
+
+function correctAnswerText(q) {
+  if (q.type === 'mcq') return `${String.fromCharCode(65 + q.a)}. ${q.opts[q.a]}`;
+  if (q.type === 'tf') return q.a ? 'True' : 'False';
+  if (q.type === 'fill') return q.a;
+  if (q.type === 'match') return q.pairs.map((p, j) => `${j+1}. ${p[0]} → ${p[1]}`).join('<br>');
+  if (q.type === 'short') return q.a;
+  return '';
+}
+
+function studentAnswerText(q, a) {
+  if (q.type === 'mcq') {
+    if (a === undefined || a === '' || a === null) return '<em>(No answer)</em>';
+    const idx = Number(a);
+    return `${String.fromCharCode(65 + idx)}. ${q.opts[idx]}`;
+  }
+  if (q.type === 'tf') {
+    if (a === undefined || a === '') return '<em>(No answer)</em>';
+    return a === 'true' ? 'True' : 'False';
+  }
+  if (q.type === 'fill') return (a || '').trim() ? escapeHtml(a) : '<em>(No answer)</em>';
+  if (q.type === 'match') {
+    if (!Array.isArray(a)) return '<em>(No answer)</em>';
+    return q.pairs.map((p, j) => {
+      const sel = a[j];
+      const def = (sel !== '' && sel !== undefined && sel !== null) ? q.pairs[Number(sel)]?.[1] : '<em>(not selected)</em>';
+      const correctDef = q.pairs[j][1];
+      const ok = sel !== '' && Number(sel) === j;
+      return `<span style="color:${ok ? 'var(--good)' : 'var(--bad)'}">${j+1}. ${p[0]} → ${def}${!ok ? ` <span style="color:#a03c34;font-size:13px">(should be: ${correctDef})</span>` : ''}</span>`;
+    }).join('<br>');
+  }
+  if (q.type === 'short') return (a || '').trim() ? escapeHtml(a) : '<em>(No answer)</em>';
+  return '<em>(No answer)</em>';
+}
+
+function startExam() {
+  exam = {uid:active, qs:units[active-1].questions, idx:0, answers:{}, left:3600, done:false};
+  if (timer) clearInterval(timer);
+  timer = setInterval(() => {
+    if (!exam || exam.done) return;
+    exam.left--;
+    const t = $('#timer');
+    if (t) t.textContent = fmt(exam.left);
+    if (exam.left <= 0) finishExam(true);
+  }, 1000);
+  renderExam();
+}
+
+function fmt(n) {
+  return `${String(Math.floor(Math.max(0,n)/60)).padStart(2,'0')}:${String(Math.max(0,n)%60).padStart(2,'0')}`;
+}
+
+function save() {
+  const e = exam, q = e.qs[e.idx];
+  e.answers[e.idx] = getanswer(q, e.idx, 'e');
+}
+
+function renderExam() {
+  const e = exam, q = e.qs[e.idx];
+  $('#view').innerHTML = `
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap">
+        <div>
+          <label>UNIT ${e.uid} EXAM · ${escapeHtml(studentName)}</label>
+          <h2>${units[e.uid-1].title}</h2>
+          <p class="muted">Task ${e.idx+1} of ${e.qs.length}</p>
+        </div>
+        <div class="timer" id="timer">${fmt(e.left)}</div>
+      </div>
+      <div class="bar"><span style="width:${(e.idx+1)/e.qs.length*100}%"></span></div>
+      <form id="ef">${qhtml(q, e.idx, 'e')}</form>
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
+        <button ${e.idx===0?'disabled':''} onclick="save();exam.idx--;renderExam()">← Previous</button>
+        <span class="muted">${Object.keys(e.answers).length} answered</span>
+        ${e.idx < e.qs.length-1
+          ? '<button class="gold" onclick="save();exam.idx++;renderExam()">Next →</button>'
+          : '<button class="gold" onclick="save();if(confirm(\'Submit exam?\'))finishExam(false)">Submit exam</button>'}
+      </div>
+      <p class="muted" style="margin-top:14px">Keep this page open until you submit.</p>
+    </div>`;
+  const a = e.answers[e.idx];
+  if (a !== undefined) {
+    if (q.type === 'match') a.forEach((x,j) => { const el = $(`[name="e${e.idx}_${j}"]`); if(el) el.value = x; });
+    else if (q.type === 'fill' || q.type === 'short') { const el = $(`[name="e${e.idx}"]`); if(el) el.value = a; }
+    else {
+      const el = $(`[name="e${e.idx}"][value="${a}"]`);
+      if (el) el.checked = true;
+    }
+  }
+}
+
+function finishExam(auto) {
+  if (!exam || exam.done) return;
+  if (timer) clearInterval(timer);
+  exam.done = true;
+  const e = exam;
+  let marks = 0, rows = [];
+  e.qs.forEach((q,i) => {
+    const a = e.answers[i];
+    let m = 0, ok = false, max = 1;
+    if (q.type === 'mcq' || q.type === 'fill' || q.type === 'tf') { ok = check(q,a); m = ok?1:0; max = 1; }
+    else if (q.type === 'match') { ok = check(q,a||[]); m = ok?10:0; max = 10; }
+    else { ok = check(q,a); m = ok?3:0; max = 3; }
+    marks += m;
+    rows.push({q, a, m, ok, max});
+  });
+  const pct = Math.round(marks/80*100);
+  progress[e.uid] = {marks,pct};
+  localStorage.setItem('jsProgress_Y2', JSON.stringify(progress));
+  $('#view').innerHTML = `
+    <div class="panel">
+      <label>EXAM COMPLETE ${auto?'• TIME EXPIRED':''}</label>
+      <h2>${escapeHtml(studentName)}'s Results</h2>
+      <div class="result">${marks} <span style="font-size:24px;color:#777">/ 80</span></div>
+      <p class="muted">${pct}% provisional score. Short-answer marking is a simple automated estimate; compare your response with the model answer.</p>
+      <div class="three">
+        <div><b>${pct}%</b><span>Score</span></div>
+        <div><b>${rows.filter(x=>x.ok).length}</b><span>Fully correct</span></div>
+        <div><b>${fmt(e.left)}</b><span>Time left</span></div>
+      </div>
+      <p style="margin-top:18px">
+        <button onclick="active=${e.uid};go('study')">Review notes</button>
+        <button class="gold" onclick="active=${e.uid};go('exam')">Try again</button>
+      </p>
+    </div>
+    <div class="head">
+      <label>DETAILED ANSWER REVIEW</label>
+      <h2>Corrections and Explanations</h2>
+      <p class="muted">Each question shows your answer, the correct answer, and the reason / explanation.</p>
+    </div>
+    ${rows.map((x,j) => `
+      <article class="q review-q">
+        <div class="qtop">
+          QUESTION ${j+1} · ${x.m} / ${x.max} MARKS · 
+          <span class="${x.ok?'text-good':'text-bad'}">${x.ok?'✓ Correct':'✗ Incorrect'}</span>
+        </div>
+        <h3>${x.q.q}</h3>
+        <div class="review-block">
+          <div class="review-line">
+            <span class="review-label">Your answer</span>
+            <span class="review-ans ${x.ok?'good':'bad'}">${studentAnswerText(x.q, x.a)}</span>
+          </div>
+          ${!x.ok ? `
+          <div class="review-line">
+            <span class="review-label">Correct answer</span>
+            <span class="review-ans correct">${correctAnswerText(x.q)}</span>
+          </div>` : ''}
+          <div class="review-why">
+            <b>Why / explanation:</b> ${x.q.why}
+          </div>
+        </div>
+      </article>`).join('')}`;
+  scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
